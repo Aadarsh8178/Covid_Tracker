@@ -13,7 +13,7 @@ app.use(timeout(120000));
 const whitelist = [
   "http://localhost:3000",
   "http://localhost:8080",
-  "https://bpc-covid-tracker.herokuapp.com/",
+  "https://ind-covid-tracker.herokuapp.com/",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
