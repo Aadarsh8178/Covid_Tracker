@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "proxy": "http://localhost:8080",
+  "homepage": "https://ind-covid-tracker.herokuapp.com/",
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",
     "babel-core": "^6.26.0",
