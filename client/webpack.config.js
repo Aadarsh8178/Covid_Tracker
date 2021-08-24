@@ -3,6 +3,8 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const port = process.env.PORT || 3000;
 var config = {
@@ -23,7 +25,7 @@ var config = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.svg$/,
@@ -39,6 +41,8 @@ var config = {
     proxy: { "/api/**": { target: "http://localhost:8080", secure: false } },
   },
   plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/public/index.html",
     }),
@@ -55,6 +59,7 @@ var config = {
       patterns: [
         { from: "./src/public/favicon.ico", to: "" },
         { from: "./src/public/manifest.json", to: "" },
+        { from: "./src/public/logo192.png", to: "public" },
         { from: "./src/public/logo192.png", to: "" },
         { from: "./src/public/logo512.png", to: "" },
       ],
