@@ -11,6 +11,7 @@ var config = {
     path: path.join(__dirname, "/dist"),
     filename: "[name].js",
     chunkFilename: "[name].js",
+    publicPath: path.join(__dirname, "/dist"),
   },
   module: {
     rules: [
