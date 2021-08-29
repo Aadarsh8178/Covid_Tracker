@@ -48,25 +48,6 @@ registerRoute(
   })
 );
 
-// Cache the underlying bootstrap files with a cache-first strategy for 1 year.
-registerRoute(
-  ({ url }) =>
-    url.origin ===
-    "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css",
-  new CacheFirst({
-    cacheName: "bootstrap-css-min",
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxAgeSeconds: 60 * 60 * 24 * 365,
-        maxEntries: 1,
-      }),
-    ],
-  })
-);
-
 /**
  * Covid Api Cache.
  *
@@ -74,13 +55,24 @@ registerRoute(
  */
 registerRoute(
   ({ url }) => url.pathname.startsWith("/api/covid"),
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: "covid-api-response",
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
       }),
-      new ExpirationPlugin({ maxEntries: 1, maxAgeSeconds: 120 }), // Will cache maximum 1 requests for 2 minutes.
+    ],
+  })
+);
+
+registerRoute(
+  ({ url }) => url.origin === "https://data.covid19india.org",
+  new StaleWhileRevalidate({
+    cacheName: "covi19ind-api-response",
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
     ],
   })
 );
