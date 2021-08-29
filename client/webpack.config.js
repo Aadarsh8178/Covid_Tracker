@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 const port = process.env.PORT || 3000;
 var config = {
@@ -49,15 +50,7 @@ var config = {
     new HtmlWebpackPlugin({
       template: "./src/public/index.html",
     }),
-    new webpack.DefinePlugin({
-      "process.env.MAPBOX_API_KEY": JSON.stringify(
-        "pk.eyJ1IjoiYmFhcGNoaSIsImEiOiJja2NkMWx4N3owYWQyMnFwNjViZzA5cTlrIn0.NXNqxw-h4POvELf5uVS7rQ"
-      ),
-      "process.env.API_DEV_BASE_URL": JSON.stringify("http://localhost:8080"),
-      "process.env.API_PROD_BASE_URL": JSON.stringify(
-        "https://bpc-covid-tracker.herokuapp.com"
-      ),
-    }),
+    new Dotenv(),
     new CopyPlugin({
       patterns: [
         { from: "./src/public/favicon.ico", to: "" },

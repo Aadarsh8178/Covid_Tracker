@@ -56,7 +56,6 @@ const CovidMap = React.memo(({ data }) => {
           >
             <MarkerImg
               width="15px"
-              height="auto"
               color="red"
               className="marker"
               onClick={() => setSelectedMark(mark)}

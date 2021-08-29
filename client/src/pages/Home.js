@@ -42,9 +42,16 @@ function Home({ loading, fetchCovidData }) {
         <div className="w-100 d-flex flex-column justify-content-center">
           <span
             className="badge bg-light"
-            style={{ width: "fit-content", margin: "auto", fontSize: "14px" }}
+            style={{
+              width: "fit-content",
+              margin: "auto",
+              fontSize: "14px",
+              wordWrap: "break-all",
+            }}
           >
-            <a href={src}>data source : {src}</a>
+            <a href={src} rel="noreferrer" target="_blank">
+              data source : {src.includes("mohfw") ? "mohfw" : "covid19india"}
+            </a>
           </span>
           <CountryData />
           <StateData />
